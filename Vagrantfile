@@ -22,6 +22,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", path: "provisioning/java8.sh"
   config.vm.provision "shell", path: "provisioning/elasticsearch.sh"
+  config.vm.provision "shell", path: "provisioning/kibana4.sh"
 
   config.vm.provision :serverspec do |spec|
     spec.pattern = 'spec/*_spec.rb'
