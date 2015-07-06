@@ -10,7 +10,10 @@ Vagrant.configure(2) do |config|
     config.cache.scope = :box
   end
 
+  # elasticsearch ports
   config.vm.network "forwarded_port", guest: 9200, host: 9200
+  config.vm.network "forwarded_port", guest: 9300, host: 9300
+
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "3096"
     vb.name = "ELK-ubuntu"

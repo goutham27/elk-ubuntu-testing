@@ -9,6 +9,8 @@ describe service 'elasticsearch' do
   it { should be_running }
 end
 
-describe port 9200 do
-  it { should be_listening }
+%w(9200 9300).each do |el_port|
+  describe port el_port do
+    it { should be_listening }
+  end
 end
