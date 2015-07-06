@@ -16,8 +16,8 @@ Vagrant.configure(2) do |config|
     vb.cpus = 2
   end
 
-  #config.vm.provision "shell", path: "provisioning/common.sh"
-  #config.vm.provision "shell", path: "provisioning/java8.sh"
+  config.vm.provision "shell", path: "provisioning/java8.sh"
+  config.vm.provision "shell", path: "provisioning/elasticsearch.sh"
 
   config.vm.provision :serverspec do |spec|
     spec.pattern = 'spec/*_spec.rb'
