@@ -17,6 +17,9 @@ Vagrant.configure(2) do |config|
   # nginx port
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
+  # If you change this IP, you must change in provisioning/files/openssl/openssl.cnf too
+  config.vm.network "private_network", ip: "172.16.255.10" 
+
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "3096"
     vb.name = "ELK-ubuntu"
@@ -27,6 +30,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "provisioning/elasticsearch.sh"
   config.vm.provision "shell", path: "provisioning/kibana4.sh"
   config.vm.provision "shell", path: "provisioning/nginx.sh"
+  config.vm.provision "shell", path: "provisioning/logstash.sh"
 
   config.vm.provision :serverspec do |spec|
     spec.pattern = 'spec/*_spec.rb'
