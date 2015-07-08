@@ -26,4 +26,5 @@ else
   echo "LS_JAVA_OPTS=-Djava.net.preferIPv4Stack=true" | sudo tee -a /etc/default/logstash
   sudo service logstash restart
   sudo cp -a /etc/pki/tls/certs/logstash-forwarder.crt /vagrant/provisioning/files/openssl
+  sleep 20 # Wait until logstash is up, is necesary for passing rspec tests
 fi
