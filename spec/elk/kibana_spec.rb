@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe file '/opt/kibana' do
   it { should be_directory }

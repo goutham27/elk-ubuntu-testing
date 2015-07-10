@@ -12,6 +12,6 @@ else
   echo "nginx installation"
   sudo apt-get -y install nginx apache2-utils
   sudo htpasswd -cb /etc/nginx/htpasswd.users "$KIBANA_ADMIN" "$KIBANA_PASSWD"
-  sudo cp -a /vagrant/provisioning/files/nginx/default /etc/nginx/sites-available/default
+  sudo cp -a /vagrant/provisioning/elk/files/nginx/default /etc/nginx/sites-available/default
   sudo service nginx restart
 fi

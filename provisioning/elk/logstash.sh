@@ -17,14 +17,14 @@ else
     -x509 -days 3650 -batch -nodes -newkey rsa:2048 \
     -keyout private/logstash-forwarder.key \
     -out certs/logstash-forwarder.crt
-  sudo cp -a /vagrant/provisioning/files/logstash/conf.d/01-lumberjack-input.conf  \
+  sudo cp -a /vagrant/provisioning/elk/files/logstash/conf.d/01-lumberjack-input.conf  \
     /etc/logstash/conf.d/
-  sudo cp -a /vagrant/provisioning/files/logstash/conf.d/10-syslog.conf \
+  sudo cp -a /vagrant/provisioning/elk/files/logstash/conf.d/10-syslog.conf \
     /etc/logstash/conf.d/
-  sudo cp -a /vagrant/provisioning/files/logstash/conf.d/30-lumberjack-output.conf \
+  sudo cp -a /vagrant/provisioning/elk/files/logstash/conf.d/30-lumberjack-output.conf \
     /etc/logstash/conf.d/
   echo "LS_JAVA_OPTS=-Djava.net.preferIPv4Stack=true" | sudo tee -a /etc/default/logstash
   sudo service logstash restart
-  sudo cp -a /etc/pki/tls/certs/logstash-forwarder.crt /vagrant/provisioning/files/openssl
+  sudo cp -a /etc/pki/tls/certs/logstash-forwarder.crt /vagrant/provisioning/common/files/openssl
   sleep 20 # Wait until logstash is up, is necesary for passing rspec tests
 fi

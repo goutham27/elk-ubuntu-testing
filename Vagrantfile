@@ -4,32 +4,36 @@
 Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/trusty64"
-  config.vm.hostname = "ELK-ubuntu"
 
-  if Vagrant.has_plugin?('vachant-cachier')
+  if Vagrant.has_plugin?("vachant-cachier")
     config.cache.scope = :box
+    config.cache.auto_detect = false
+    config.cache.enable :apt
+    config.cache.enable :apt_lists
   end
-
+  config.vm.define 'elk' do |elk|
+    elk.vm.hostname = "ELK-ubuntu"
   # nginx port
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+    elk.vm.network "forwarded_port", guest: 80, host: 8080
 
   # If you change this IP, you must change in provisioning/files/openssl/openssl.cnf too
-  config.vm.network "private_network", ip: "172.16.255.10" 
+    elk.vm.network "private_network", ip: "172.16.255.10" 
 
-  config.vm.provider "virtualbox" do |vb|
-    vb.memory = "3096"
-    vb.name = "ELK-ubuntu"
-    vb.cpus = 2
+    elk.vm.provider "virtualbox" do |vb|
+      vb.memory = "3096"
+      vb.name = "ELK-ubuntu"
+      vb.cpus = 2
+    end
+
+    elk.vm.provision "shell", path: "provisioning/elk/java8.sh"
+    elk.vm.provision "shell", path: "provisioning/elk/elasticsearch.sh"
+    elk.vm.provision "shell", path: "provisioning/elk/kibana4.sh"
+    elk.vm.provision "shell", path: "provisioning/elk/nginx.sh"
+    elk.vm.provision "shell", path: "provisioning/elk/logstash.sh"
+
+    elk.vm.provision :serverspec do |spec|
+      spec.pattern = 'spec/elk/*_spec.rb'
+    end
   end
-
-  config.vm.provision "shell", path: "provisioning/java8.sh"
-  config.vm.provision "shell", path: "provisioning/elasticsearch.sh"
-  config.vm.provision "shell", path: "provisioning/kibana4.sh"
-  config.vm.provision "shell", path: "provisioning/nginx.sh"
-  config.vm.provision "shell", path: "provisioning/logstash.sh"
-
-  config.vm.provision :serverspec do |spec|
-    spec.pattern = 'spec/*_spec.rb'
-  end
-
+  
 end

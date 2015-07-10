@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 files = %w(
   /etc/apt/sources.list.d/logstash.list
