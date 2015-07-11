@@ -13,10 +13,11 @@ Vagrant.configure(2) do |config|
   end
   config.vm.define 'elk' do |elk|
     elk.vm.hostname = "ELK-ubuntu"
-  # nginx port
+    # nginx port
     elk.vm.network "forwarded_port", guest: 80, host: 8080
 
-  # If you change this IP, you must change in provisioning/files/openssl/openssl.cnf too
+    # If you change this IP, you must change in 
+    # provisioning/files/openssl/openssl.cnf too
     elk.vm.network "private_network", ip: "172.16.255.10" 
 
     elk.vm.provider "virtualbox" do |vb|
@@ -36,4 +37,14 @@ Vagrant.configure(2) do |config|
     end
   end
   
+  config.vm.define 'syslog' do |syslog|
+
+    syslog.vm.network "private_network", ip: "172.16.255.20" 
+    
+    #syslog.vm.provision "shell", path: "provisioning/syslog/deploy.sh"
+    
+    syslog.vm.provision :serverspec do |spec|
+      spec.pattern = 'spec/syslog/*_spec.rb'
+    end
+  end
 end
