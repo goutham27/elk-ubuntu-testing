@@ -39,9 +39,11 @@ Vagrant.configure(2) do |config|
   
   config.vm.define 'syslog' do |syslog|
 
+    syslog.vm.hostname = "syslog-ubuntu"
+
     syslog.vm.network "private_network", ip: "172.16.255.20" 
     
-    #syslog.vm.provision "shell", path: "provisioning/syslog/deploy.sh"
+    syslog.vm.provision "shell", path: "provisioning/syslog/deploy.sh"
     
     syslog.vm.provision :serverspec do |spec|
       spec.pattern = 'spec/syslog/*_spec.rb'
