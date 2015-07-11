@@ -13,6 +13,7 @@ else
   sudo mkdir -p /etc/pki/tls/certs
   sudo mkdir /etc/pki/tls/private
   cd /etc/pki/tls
+  sudo cp -a /vagrant/provisioning/elk/files/openssl/openssl.cnf /etc/ssl/
   sudo openssl req -config /etc/ssl/openssl.cnf \
     -x509 -days 3650 -batch -nodes -newkey rsa:2048 \
     -keyout private/logstash-forwarder.key \

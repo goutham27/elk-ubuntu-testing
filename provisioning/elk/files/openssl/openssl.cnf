@@ -226,7 +226,7 @@ keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 
 # Extensions for a typical CA
 
-subjectAltName = IP: 172.16.255.10
+subjectAltName = IP:172.16.255.10
 
 # PKIX recommendation.
 
