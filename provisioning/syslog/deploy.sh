@@ -12,6 +12,6 @@ wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch \
 sudo apt-get update
 sudo apt-get install logstash-forwarder
 
-cp -a provisioning/syslog/files/logstash-forwarder.conf /etc/
+sudo cp -a /vagrant/provisioning/syslog/files/logstash-forwarder.conf /etc/
 
 sudo service logstash-forwarder start
