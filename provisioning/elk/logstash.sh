@@ -2,7 +2,7 @@
 
 # Based on https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-4-on-ubuntu-14-04
 
-test -f '/etc/apt/sources.list.d/logstash.list' > /dev/null
+test -f '/etc/apt/sources.list.d/logstash.list' 
 if [ $? -eq 0 ]; then
   echo "skip logstash installation"
 else

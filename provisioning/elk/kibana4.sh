@@ -2,7 +2,7 @@
 
 # Based on https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-4-on-ubuntu-14-04
 
-test -d '/opt/kibana' > /dev/null
+test -d '/opt/kibana' 
 if [ $? -eq 0 ]; then
   echo "skip kibana4 installation"
 else
